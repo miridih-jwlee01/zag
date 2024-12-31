@@ -15,7 +15,7 @@ const fetchMachine = createMachine({
   context: {
     "isTouchPointer": false,
     "isTouchPointer": false,
-    "clampValueOnBlur && !isInRange": false,
+    "clampValueOnBlur && !isInRange && !isValueEmpty": false,
     "isIncrementHint": false,
     "isDecrementHint": false,
     "isInRange && spinOnPress": false,
@@ -96,7 +96,7 @@ const fetchMachine = createMachine({
           actions: ["setValue", "setHint"]
         },
         "INPUT.BLUR": [{
-          cond: "clampValueOnBlur && !isInRange",
+          cond: "clampValueOnBlur && !isInRange && !isValueEmpty",
           target: "idle",
           actions: ["setClampedValue", "clearHint", "invokeOnBlur"]
         }, {
@@ -181,7 +181,7 @@ const fetchMachine = createMachine({
   },
   guards: {
     "isTouchPointer": ctx => ctx["isTouchPointer"],
-    "clampValueOnBlur && !isInRange": ctx => ctx["clampValueOnBlur && !isInRange"],
+    "clampValueOnBlur && !isInRange && !isValueEmpty": ctx => ctx["clampValueOnBlur && !isInRange && !isValueEmpty"],
     "isIncrementHint": ctx => ctx["isIncrementHint"],
     "isDecrementHint": ctx => ctx["isDecrementHint"],
     "isInRange && spinOnPress": ctx => ctx["isInRange && spinOnPress"]

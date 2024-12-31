@@ -26,7 +26,7 @@ test.describe("number input", () => {
     await I.seeInputHasValue("100")
   })
 
-  test("should clamp value when input is empty", async () => {
+  test("should not clamp value when input is empty", async () => {
     await I.type("5")
     await I.pressKey("Backspace")
     await I.clickOutside()

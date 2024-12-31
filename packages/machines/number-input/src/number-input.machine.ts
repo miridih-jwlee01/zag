@@ -135,7 +135,7 @@ export function machine(userContext: UserDefinedContext) {
             },
             "INPUT.BLUR": [
               {
-                guard: and("clampValueOnBlur", not("isInRange")),
+                guard: and("clampValueOnBlur", not("isInRange"), not("isValueEmpty")),
                 target: "idle",
                 actions: ["setClampedValue", "clearHint", "invokeOnBlur"],
               },
@@ -231,6 +231,7 @@ export function machine(userContext: UserDefinedContext) {
         isDecrementHint: (ctx, evt) => (evt.hint ?? ctx.hint) === "decrement",
         isIncrementHint: (ctx, evt) => (evt.hint ?? ctx.hint) === "increment",
         isTouchPointer: (_ctx, evt) => evt.pointerType === "touch",
+        isValueEmpty: (ctx) => ctx.value === "",
       },
 
       activities: {
